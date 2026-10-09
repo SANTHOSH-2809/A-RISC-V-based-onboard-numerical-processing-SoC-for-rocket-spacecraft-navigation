@@ -120,9 +120,17 @@ Phase3 (FPU double)
 - `0x5`: **ITOD** (32-bit Integer to 64-bit Double conversion)
 - `0x6`: **DTOI** (64-bit Double to 32-bit Integer conversion)
 
-### PuTTy Terminal:
-<img width="706" height="351" alt="image" src="https://github.com/user-attachments/assets/5649365e-4228-4812-9551-9468e29af396" />
+### PuTTy Terminal Output:
 
+<img width="797" height="292" alt="image" src="https://github.com/user-attachments/assets/ded7b15f-5b3c-4eac-98d7-c3751e90d0d3" />
+
+### Timing Summary:
+
+
+### Power Summary:
+
+
+### Schematic:
 
 
 
