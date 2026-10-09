@@ -94,3 +94,36 @@ file name: first_try(2)
 <img width="1162" height="431" alt="image" src="https://github.com/user-attachments/assets/9cc879a4-fc10-4a22-bac9-609e6a27ecca" />
 
 
+Phase3 (FPU double)
+
+## 64-Bit Double Precision MMIO Register Interface (`0x2000_0000`)
+
+| Address Offset | Register Name | Width | Functional Description |
+| --- | --- | --- | --- |
+| `0x00` | `REG_FPU_OPA_LO` | 32-bit | Lower 32 bits of 64-bit Operand A (`opa[31:0]`) |
+| `0x04` | `REG_FPU_OPA_HI` | 32-bit | Upper 32 bits of 64-bit Operand A (`opa[63:32]`) |
+| `0x08` | `REG_FPU_OPB_LO` | 32-bit | Lower 32 bits of 64-bit Operand B (`opb[31:0]`) |
+| `0x0C` | `REG_FPU_OPB_HI` | 32-bit | Upper 32 bits of 64-bit Operand B (`opb[63:32]`) |
+| `0x10` | `REG_FPU_OPC_LO` | 32-bit | Lower 32 bits of 64-bit Accumulator C (`opc[31:0]`) |
+| `0x14` | `REG_FPU_OPC_HI` | 32-bit | Upper 32 bits of 64-bit Accumulator C (`opc[63:32]`) |
+| `0x18` | `REG_FPU_CTRL`   | 32-bit | `[3:0]`: Opcode, `[4]`: Start Pulse |
+| `0x1C` | `REG_FPU_RES_LO` | 32-bit | Lower 32 bits of 64-bit Result (Auto-stalls CPU until done) |
+| `0x20` | `REG_FPU_RES_HI` | 32-bit | Upper 32 bits of 64-bit Result (`result[63:32]`) |
+| `0x24` | `REG_FPU_PERF`   | 32-bit | Execution cycle counter |
+
+### Supported 64-Bit Opcodes:
+- `0x0`: **DADD** (64-bit Double Addition: $A + B$)
+- `0x1`: **DSUB** (64-bit Double Subtraction: $A - B$)
+- `0x2`: **DMUL** (64-bit Double Multiplication: $A \times B$)
+- `0x3`: **DDIV** (64-bit Double Division: $A / B$)
+- `0x4`: **DSQRT** (64-bit Double Square Root: $\sqrt{A}$)
+- `0x5`: **ITOD** (32-bit Integer to 64-bit Double conversion)
+- `0x6`: **DTOI** (64-bit Double to 32-bit Integer conversion)
+
+### PuTTy Terminal:
+<img width="706" height="351" alt="image" src="https://github.com/user-attachments/assets/5649365e-4228-4812-9551-9468e29af396" />
+
+
+
+
+
