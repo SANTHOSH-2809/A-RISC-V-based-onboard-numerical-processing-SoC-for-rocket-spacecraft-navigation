@@ -65,4 +65,4 @@ Tcl Console:
 ## Schematic:
 <img width="1162" height="431" alt="image" src="https://github.com/user-attachments/assets/9cc879a4-fc10-4a22-bac9-609e6a27ecca" />
 
-
+first_try(2)
