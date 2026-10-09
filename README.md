@@ -69,6 +69,10 @@ NASA describes onboard computing as responsible for real-time control, command e
 
 file name: first_try(2)
 
+### Device:
+
+<img width="527" height="683" alt="image" src="https://github.com/user-attachments/assets/275da8b8-fac5-4103-bb75-557c522d8935" />
+
 ### Resource Utilization:
 
 <img width="485" height="245" alt="image" src="https://github.com/user-attachments/assets/8a2dc094-9bc2-4ca5-bb4e-20eb27a0c961" />
