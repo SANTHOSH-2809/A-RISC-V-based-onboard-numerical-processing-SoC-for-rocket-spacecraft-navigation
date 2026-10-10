@@ -14,17 +14,18 @@ NASA describes onboard computing as responsible for real-time control, command e
 ---
 
 ## Overview of Calculations:
-| No. | Calculation | Mathematical formula | Implementation |
-|---|---|---|---|
-| 1 | Accelerometer data conversion | \(a = \frac{\text{Raw}}{256}\times 9.80665\) | Software and FP64 hardware multiplier |
-| 2 | Time interval calculation | \(\Delta t = \frac{\Delta N}{25,000,000}\) | Timer and FP64 multiplier |
+
+| No. | Calculation | Mathematical Formula | Implementation |
+|:---:|---|---|---|
+| 1 | Accelerometer data conversion | \(a = \frac{\text{Raw}}{256} \times 9.80665\) | Software and FP64 hardware multiplier |
+| 2 | Time interval calculation | \(\Delta t = \frac{\Delta N}{25{,}000{,}000}\) | Timer and FP64 multiplier |
 | 3 | Velocity increment | \(\Delta v = a \times \Delta t\) | FP64 hardware multiplier |
 | 4 | Temperature compensation | Bosch BMP180 compensation equations | Integer arithmetic in C |
 | 5 | Atmospheric pressure calculation | Bosch BMP180 compensation equations | Integer arithmetic in C |
-| 6 | Floating-point multiplication | \(Z=A\times B\) | IEEE-754 double-precision hardware accelerator |
-| 7 | Posit multiply-accumulate | \(S \leftarrow S+(A\times B)\) | Posit arithmetic hardware |
-| 8 | Execution-time measurement | \(\Delta N=N_{\text{end}}-N_{\text{start}}\) | 64-bit mission timer |
-| 9 | Floating-point representation conversion | Integer ↔ IEEE-754 binary64 | Software conversion routines |
+| 6 | Floating-point multiplication | \(Z = A \times B\) | IEEE-754 double-precision hardware accelerator |
+| 7 | Posit multiply-accumulate | \(S \leftarrow S + (A \times B)\) | Posit arithmetic hardware |
+| 8 | Execution-time measurement | \(\Delta N = N_{\text{end}} - N_{\text{start}}\) | 64-bit mission timer |
+| 9 | Floating-point representation conversion | Integer \(\leftrightarrow\) IEEE-754 binary64 | Software conversion routines |
 
 ## Accelerometer calculation: 
 **Converting raw data into acceleration**
