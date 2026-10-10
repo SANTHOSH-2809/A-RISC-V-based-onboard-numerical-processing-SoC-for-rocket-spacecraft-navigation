@@ -220,9 +220,9 @@ file name: first_try(2)
 <img width="1162" height="431" alt="image" src="https://github.com/user-attachments/assets/9cc879a4-fc10-4a22-bac9-609e6a27ecca" />
 
 
-Phase3 (FPU double)
+##Phase3 (FPU double)
 
-## 64-Bit Double Precision MMIO Register Interface (`0x2000_0000`)
+### 64-Bit Double Precision MMIO Register Interface (`0x2000_0000`)
 
 | Address Offset | Register Name | Width | Functional Description |
 | --- | --- | --- | --- |
