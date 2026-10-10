@@ -11,10 +11,92 @@ NASA describes onboard computing as responsible for real-time control, command e
 
  - That gives you a very good justification for your architecture.
 
+---
+
+## Overview of Calculations:
+| No. | Calculation | Mathematical formula | Implementation |
+|---|---|---|---|
+| 1 | Accelerometer data conversion | \(a = \frac{\text{Raw}}{256}\times 9.80665\) | Software and FP64 hardware multiplier |
+| 2 | Time interval calculation | \(\Delta t = \frac{\Delta N}{25,000,000}\) | Timer and FP64 multiplier |
+| 3 | Velocity increment | \(\Delta v = a \times \Delta t\) | FP64 hardware multiplier |
+| 4 | Temperature compensation | Bosch BMP180 compensation equations | Integer arithmetic in C |
+| 5 | Atmospheric pressure calculation | Bosch BMP180 compensation equations | Integer arithmetic in C |
+| 6 | Floating-point multiplication | \(Z=A\times B\) | IEEE-754 double-precision hardware accelerator |
+| 7 | Posit multiply-accumulate | \(S \leftarrow S+(A\times B)\) | Posit arithmetic hardware |
+| 8 | Execution-time measurement | \(\Delta N=N_{\text{end}}-N_{\text{start}}\) | 64-bit mission timer |
+| 9 | Floating-point representation conversion | Integer ↔ IEEE-754 binary64 | Software conversion routines |
+
+## Accelerometer calculation: 
+**Converting raw data into acceleration**
+Your firmware reads the X, Y, and Z acceleration measurements from the ADXL345 accelerometer.
+The relevant functions in firmware/main.c are:
+- `adxl345_init()`
+- `adxl345_read()`
+
+### Step 1: Read the raw sensor data
+The ADXL345 provides separate bytes for each axis.
+Your code combines two bytes into a signed 16-bit integer:
+```
+*x = (int16_t)(buffer[0] | (buffer[1] << 8));
+*y = (int16_t)(buffer[2] | (buffer[3] << 8));
+*z = (int16_t)(buffer[4] | (buffer[5] << 8));
+```
+
+### Step 2: Convert raw data into acceleration
+
+Firmware defines the conversion coefficient:
+uint64_t S_COEFF = 0x3fa39d013a92a305ULL;
+
+This constant represents approximately:
+\[
+S_{\text{COEFF}}=\frac{9.80665}{256}
+\]
+\[
+a_x=\frac{256}{256}\times9.80665
+\]
+
+### Step 3: Time interval calculation
+The elapsed time in seconds is calculated using:
+\[
+\boxed{\Delta t=\frac{\Delta N}{f_{\text{timer}}}}
+\]
+where:
+- \(\Delta N\) = elapsed timer ticks
+- \(f_{\text{timer}}\) = timer clock frequency
+- \(\Delta t\) = elapsed time in seconds
+Your firmware assumes a timer frequency of 25 MHz:
+uint64_t TIMER_COEFF =
+    0x3e65798ee2308c3aULL;
+
+This represents approximately:
+\[
+\frac{1}{25,000,000}
+\]
+Consequently:
+\[
+\boxed{\Delta t=\frac{\Delta N}{25,000,000}}
+\]
+
+\[
+\Delta N=250,000
+\]
+Then:
+\[
+\Delta t=\frac{250,000}{25,000,000}
+\]
+Therefore:
+\[
+\boxed{\Delta t=0.01\text{ seconds}}
+\]
+This is equivalent to 10 milliseconds.
+
+The FP64 hardware multiplier calculates the product of the converted tick count and the constant representing the reciprocal timer frequency.
+
+
+
+---
 
 ## Phase 2(FPU 32bit):
-
-
 
 ### Memory Map (MMIO)
 
