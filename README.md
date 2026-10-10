@@ -27,6 +27,7 @@ NASA describes onboard computing as responsible for real-time control, command e
 | 8 | Execution-time measurement | ΔN = N<sub>end</sub> − N<sub>start</sub> | 64-bit mission timer |
 | 9 | Floating-point representation conversion | Integer ↔ IEEE-754 binary64 | Software conversion routines |
 
+---
 
 ## Accelerometer calculation: 
 **Converting raw data into acceleration**
@@ -106,7 +107,6 @@ Therefore:
 **Δt = 0.01 seconds = 10 milliseconds**
 
 The FP64 hardware multiplier calculates the product of the converted tick count and the constant representing the reciprocal timer frequency.
-
 
 ---
 
@@ -371,3 +371,27 @@ Select Option [1-4 / Q]: 4
 ### Resource Utilization:
 
 <img width="483" height="242" alt="image" src="https://github.com/user-attachments/assets/69350395-a08a-463e-8d8e-81908cef771f" />
+
+---
+
+## Final 
+
+Design:
+<img width="508" height="761" alt="Screenshot 2026-10-10 135646" src="https://github.com/user-attachments/assets/091b1eae-1ca6-4ac9-b75c-8adf29816a30" />
+
+### Resource Utilization:
+<img width="413" height="180" alt="Screenshot 2026-10-10 103947" src="https://github.com/user-attachments/assets/e71a4aa1-03d5-4d24-a629-08a74049a4d9" />
+
+### Power Report:
+<img width="807" height="527" alt="Screenshot 2026-10-10 135518" src="https://github.com/user-attachments/assets/9cd07c7c-01db-4978-a0f2-7a6f671dc2cb" />
+
+### Timing Report:
+<img width="1077" height="332" alt="Screenshot 2026-10-10 135512" src="https://github.com/user-attachments/assets/79a4e48a-3a6a-46ca-8156-8a60854f58d5" />
+
+### Input Constraints
+<img width="1602" height="763" alt="Screenshot 2026-10-10 135503" src="https://github.com/user-attachments/assets/3007e287-7621-4fa2-87d7-eaecf8f3184d" />
+
+### Schematic:
+<img width="1557" height="707" alt="Screenshot 2026-10-10 135808" src="https://github.com/user-attachments/assets/9d15f5f3-1b16-44df-84e4-d88c65aefcd8" />
+
+---
