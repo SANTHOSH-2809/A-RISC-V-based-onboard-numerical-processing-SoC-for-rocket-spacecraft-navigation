@@ -47,53 +47,65 @@ Your code combines two bytes into a signed 16-bit integer:
 ### Step 2: Convert raw data into acceleration
 
 Firmware defines the conversion coefficient:
+
+```c
 uint64_t S_COEFF = 0x3fa39d013a92a305ULL;
+```
 
 This constant represents approximately:
-\[
-S_{\text{COEFF}}=\frac{9.80665}{256}
-\]
-\[
-a_x=\frac{256}{256}\times9.80665
-\]
+
+**S_COEFF = 9.80665 / 256**
+
+The acceleration along the X-axis is calculated as:
+
+**aₓ = (Rawₓ / 256) × 9.80665**
+
+where:
+- `Rawₓ` = raw accelerometer reading along the X-axis
+- 256 = sensitivity in LSB/g for the ADXL345 in ±2 g fixed-resolution mode
+- 9.80665 = standard gravitational acceleration in m/s²
+
+The same calculation applies to the Y and Z axes.
 
 ### Step 3: Time interval calculation
+
 The elapsed time in seconds is calculated using:
-\[
-\boxed{\Delta t=\frac{\Delta N}{f_{\text{timer}}}}
-\]
+
+**Δt = ΔN / f_timer**
+
 where:
-- \(\Delta N\) = elapsed timer ticks
-- \(f_{\text{timer}}\) = timer clock frequency
-- \(\Delta t\) = elapsed time in seconds
-Your firmware assumes a timer frequency of 25 MHz:
-uint64_t TIMER_COEFF =
-    0x3e65798ee2308c3aULL;
 
-This represents approximately:
-\[
-\frac{1}{25,000,000}
-\]
+- **ΔN** = elapsed timer ticks
+- **f_timer** = timer clock frequency in Hz
+- **Δt** = elapsed time in seconds
+
+Your firmware assumes a timer frequency of **25 MHz**:
+
+```c
+uint64_t TIMER_COEFF = 0x3e65798ee2308c3aULL;
+```
+
+This constant represents approximately:
+
+**TIMER_COEFF = 1 / 25,000,000**
+
 Consequently:
-\[
-\boxed{\Delta t=\frac{\Delta N}{25,000,000}}
-\]
 
-\[
-\Delta N=250,000
-\]
+**Δt = ΔN / 25,000,000**
+
+For example, if:
+
+**ΔN = 250,000 ticks**
+
 Then:
-\[
-\Delta t=\frac{250,000}{25,000,000}
-\]
+
+**Δt = 250,000 / 25,000,000**
+
 Therefore:
-\[
-\boxed{\Delta t=0.01\text{ seconds}}
-\]
-This is equivalent to 10 milliseconds.
+
+**Δt = 0.01 seconds = 10 milliseconds**
 
 The FP64 hardware multiplier calculates the product of the converted tick count and the constant representing the reciprocal timer frequency.
-
 
 
 ---
