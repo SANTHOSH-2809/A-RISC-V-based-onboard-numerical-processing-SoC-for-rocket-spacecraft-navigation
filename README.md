@@ -110,6 +110,28 @@ The FP64 hardware multiplier calculates the product of the converted tick count 
 
 ---
 
+## Phase 1(in picorv32IM alone):
+
+### Output in cmd:
+<img width="1917" height="763" alt="Screenshot 2026-10-10 103738" src="https://github.com/user-attachments/assets/f1022304-741f-445d-9455-40ae3e46a8d2" />
+
+### Resource Utilization:
+<img width="413" height="180" alt="Screenshot 2026-10-10 103947" src="https://github.com/user-attachments/assets/ffe96e95-7c25-4023-bdf8-0c49963f0db3" />
+
+### Timing Report:
+<img width="1083" height="305" alt="Screenshot 2026-10-10 103828" src="https://github.com/user-attachments/assets/434a0db3-e170-4e86-afd8-6ab9cfe46726" />
+
+### Power Report:
+<img width="850" height="532" alt="Screenshot 2026-10-10 103818" src="https://github.com/user-attachments/assets/55488fe5-7d22-4fbf-a056-67dc20b0cf23" />
+
+### Schmetic:
+<img width="596" height="831" alt="Screenshot 2026-10-10 103854" src="https://github.com/user-attachments/assets/38d31382-8767-45f0-81cb-c1016a8c898f" />
+
+### Device:
+<img width="502" height="766" alt="Screenshot 2026-10-10 103919" src="https://github.com/user-attachments/assets/78785b70-dafd-4c5c-8c72-b047e59179bb" />
+
+---
+
 ## Phase 2(FPU 32bit):
 
 ### Memory Map (MMIO)
